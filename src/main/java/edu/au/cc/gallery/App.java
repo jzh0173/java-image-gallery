@@ -51,9 +51,9 @@ public class App {
 	} else {
 	    port(Integer.parseInt(portString));
 	}
-	/*
-	get("/hello", (req, res) -> "Hello World");
-	get("/goodbye", (req, res) -> "Goodbye World");
+	
+	get("/hello", (req, res) -> "Hello World.");
+	get("/goodbye", (req, res) -> "Goodbye World.");
 
 	get("test", (req, res) -> {
 		Map<String, Object> model = new HashMap<String, Object>();
@@ -80,6 +80,6 @@ public class App {
 								 new ModelAndView(model, "edituser.hbs")
 								 );
 		});
-	*/
+	
     }	
 }
