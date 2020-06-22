@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add User</title>
+    </head>
+    <body>
+      <p><a href="/admin/edituser"> User </a>  |    Password    |   Fullname </p>
+      <p><form method="get" action="admin/adduser"><button type="submit">Add user</button></form>
+    </body>
+    </html>

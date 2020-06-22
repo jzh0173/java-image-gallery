@@ -3,12 +3,83 @@
  */
 package edu.au.cc.gallery;
 
+import static spark.Spark.*;
+import java.util.HashMap;
+import java.util.Map;
+import spark.ModelAndView;
+import spark.template.handlebars.HandlebarsTemplateEngine;
+import java.util.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+//import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+//import com.amazonaws.regions.Regions;
+//import com.amazonaws.services.lambda.AWSLambda;
+//import com.amazonaws.services.lambda.AWSLambdaClientBuilder;
+//import com.amazonaws.services.lambda.model.InvokeRequest;
+//import com.amazonaws.services.lambda.model.InvokeResult;
+//import com.amazonaws.services.lambda.model.ServiceException;
+
 public class App {
     public String getGreeting() {
         return "Hello world.";
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    private JSONObject getSecret() {
+	String s = Secrets.getSecretImageGallery();
+	return new JSONObject(s);
     }
+
+    private String getPassword(JSONObject secret) {
+	return secret.getString("password");
+    }
+
+    public static void main(String[] args) throws Exception {
+        System.out.println(new App().getGreeting());
+	//	Secrets sec = new Secrets();
+	//System.out.println(sec.getSecretImageGallery());
+	App app = new App();	
+	//System.out.println(sec.getSecretImageGallery().get("password"));
+	//	JSONObject secret = app.getSecret();
+	//	System.out.println(app.getPassword(secret));
+	//	db dbtest = new db();
+	//dbtest.demo();
+
+	String portString = System.getenv("JETTY_PORT");
+	if (portString == null || portString.equals("")) {
+	    port(5000);
+	} else {
+	    port(Integer.parseInt(portString));
+	}
+	/*
+	get("/hello", (req, res) -> "Hello World");
+	get("/goodbye", (req, res) -> "Goodbye World");
+
+	get("test", (req, res) -> {
+		Map<String, Object> model = new HashMap<String, Object>();
+		return new HandlebarsTemplateEngine().render(
+		   new ModelAndView(model, "test.hbs")
+  	         );
+		 });
+
+	get("/admin", (req, res) -> {
+                Map<String, Object> model = new HashMap<String, Object>();
+                return new HandlebarsTemplateEngine().render(
+							     new ModelAndView(model, "dbadmin.hbs")
+							     );
+	    });
+
+	get("/admin/adduser", (req, res) -> {
+                Map<String, Object> model = new HashMap<String, Object>();
+                return new HandlebarsTemplateEngine().render(
+                                                             new ModelAndView(model, "adduser.hbs")
+                                                             );
+            });get("/admin/edituser", (req, res) -> {
+		    Map<String, Object> model = new HashMap<String, Object>();
+		    return new HandlebarsTemplateEngine().render(
+								 new ModelAndView(model, "edituser.hbs")
+								 );
+		});
+	*/
+    }	
 }
