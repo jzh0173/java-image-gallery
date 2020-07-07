@@ -44,9 +44,11 @@ public class db {
         try
             {
                 Class.forName("org.postgresql.Driver");
-		JSONObject secret = getSecret();
-                conn = DriverManager.getConnection(dbUrl, "image_gallery", getPassword(secret));
+		//	JSONObject secret = getSecret();
+		//                conn = DriverManager.getConnection(dbUrl, "image_gallery", getPassword(secret));
+		conn = DriverManager.getConnection(dbUrl, "image_gallery", "aaAA11!!55");
             }
+	
         catch (ClassNotFoundException ex) {
 	    ex.printStackTrace();
 	    System.exit(1);
@@ -62,6 +64,30 @@ public class db {
         }
         rs.close();
     }
+
+    public ResultSet executeQuery(String query) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement(query);
+	ResultSet rs = stmt.executeQuery();
+	return rs;
+    }
+
+    public ResultSet executeQuery(String query, String[] values) throws SQLException {
+        PreparedStatement stmt = conn.prepareStatement(query);
+        for (int i = 0; i < values.length; i++) {
+            stmt.setString(i+1, values[i]);
+	}
+	return stmt.executeQuery();
+    }
+
+
+    public void execute(String query, String[] values) throws SQLException {
+	PreparedStatement stmt = conn.prepareStatement(query);
+	for (int i = 0; i < values.length; i++) {
+	    stmt.setString(i+1, values[i]);
+	}
+	stmt.execute();
+    }
+
 
     public void addUser() throws SQLException {
         String name = "", password = "", fullname = "";

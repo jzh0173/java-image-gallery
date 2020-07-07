@@ -37,6 +37,9 @@ implementation group: 'com.sparkjava', name: 'spark-template-handlebars', versio
 
 implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.21'
 
+//implementation 'com.amazonaws:aws-java-sdk-s3'
+implementation 'com.amazonaws:aws-java-sdk:1.11.404'
+
     // Use JUnit test framework
     testImplementation 'junit:junit:4.13'
 }
